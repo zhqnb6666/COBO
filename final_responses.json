@@ -1,0 +1,12 @@
+[
+    {
+        "index": 1,
+        "prompt": "hist = [0] * 1000005\n\ndef solve(n, s):\n\ttot = 0\n\tcur = 0\n\ti = 0\n\twhile i < n:\n\t\tif s[i] == '0':\n\t\t\ttot += cur\n\t\telse:\n\t\t\tl = i\n\t\t\tr = i\n\t\t\twhile r + 1 < n and s[r + 1] == '1':\n\t\t\t\tr += 1\n\t\t\tfor x in range(r - l + 1):\n\t\t\t\tcur += l + x + 1 - hist[x]\n\t\t\t\ttot += cur\n\t\t\t\thist[x] = r - x + 1\n\t\t\ti = r\n\t\ti += 1\n\treturn tot\nn = int(input())\ns = input()\nprint(solve(n, s))\n",
+        "response": "hist = [0] * 1000005\n\ndef solve(n, s):\n    tot = cur = i = 0\n    while i < n:\n        if s[i] == '0':\n            tot += cur\n        else:\n            l = r = i\n            while r + 1 < n and s[r + 1] == '1':\n                r += 1\n            for x in range(r - l + 1):\n                cur += l + x + 1 - hist[x]\n                tot += cur\n                hist[x] = r - x + 1\n            i = r\n        i += 1\n    return tot\n\nn = int(input().strip())\ns = input().strip()\nprint(solve(n, s))"
+    },
+    {
+        "index": 2,
+        "prompt": "from collections import deque\nMAX_A = 1000\n\ndef main():\n\t(n, k) = map(int, input().split())\n\ta = set((int(x) - n for x in input().split()))\n\tvisited = [False] * (2 * MAX_A + 1)\n\tvisited[n] = True\n\tQ = deque()\n\tQ.append((n, 0))\n\tresult = None\n\twhile Q:\n\t\t(u, l) = Q.popleft()\n\t\tl += 1\n\t\tfor ai in a:\n\t\t\tv = u + ai\n\t\t\tif v == n:\n\t\t\t\tresult = l\n\t\t\t\tbreak\n\t\t\tif 0 <= v < len(visited) and (not visited[v]):\n\t\t\t\tvisited[v] = True\n\t\t\t\tQ.append((v, l))\n\t\tif result is not None:\n\t\t\tbreak\n\tif result is None:\n\t\tresult = -1\n\tprint(result)\nmain()\n",
+        "response": "def main():\n    (n, k) = map(int, input().split())\n    a = set((int(x) - n for x in input().split()))\n    visited = [False] * (2 * MAX_A + 1)\n    visited[n] = True\n    Q = deque([(n, 0)])\n    result = -1\n    while Q:\n        (u, l) = Q.popleft()\n        l += 1\n        for ai in a:\n            v = u + ai\n            if v == n:\n                result = l\n                break\n            if 0 <= v < len(visited) and (not visited[v]):\n                visited[v] = True\n                Q.append((v, l))\n        if result != -1:\n            break\n    print(result)\nmain()"
+    }
+]

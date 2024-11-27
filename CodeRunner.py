@@ -27,7 +27,7 @@ class ExecutionStatus:
 
     @staticmethod
     def return_code_error(code: int) -> Tuple[bool, str]:
-        return (False, f"returncode:{code}")
+        return False, f"returncode:{code}"
 
 
 class TimeoutException(Exception):

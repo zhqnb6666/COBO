@@ -21,7 +21,7 @@ def run_solution(sample):
     except Exception:
             return 0, 0, False, -1, -1
 
-    max_elapsed_time = 0
+    max_elapsed_time = float('-inf')
     min_elapsed_time = float('inf')
     success = False
     slowest_solution_index = -1

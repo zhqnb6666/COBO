@@ -21,7 +21,7 @@ def run_solution(sample):
     except Exception:
             return 0, 0, False, -1, -1
 
-    max_elapsed_time = 0
+    max_elapsed_time = float('-inf')
     min_elapsed_time = float('inf')
     success = False
     slowest_solution_index = -1
@@ -29,7 +29,13 @@ def run_solution(sample):
 
     for index, solution in enumerate(solutions):
         try:
-            current_success, current_time = runner.run_test(sample, solution)
+            current_success = False
+            current_time = 0
+            for _ in range(3):
+                success, time = runner.run_test(sample, solution)
+                current_success = success and current_success
+                current_time += time
+            current_time /= 3
             print(f'current solution {index} current time {current_time}')
 
             if current_success:
@@ -102,8 +108,8 @@ def evaluate_taco_subset(start_idx=0, end_idx=10):
                 print(f"Error while writing fail data for sample {sample_id}: {str(e)}")
 
         return result
-
-    with concurrent.futures.ThreadPoolExecutor() as executor:
+    # 自己调整 max_workers 的值，少于CPU核心数应该就行
+    with concurrent.futures.ProcessPoolExecutor(max_workers=8) as executor:
         futures = {
             executor.submit(process_sample, start_idx + i, sample): start_idx + i
             for i, sample in enumerate(taco_subset)

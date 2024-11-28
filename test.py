@@ -29,7 +29,7 @@ def run_solution(sample):
 
     for index, solution in enumerate(solutions):
         try:
-            current_success = False
+            current_success = True
             current_time = 0
             for _ in range(3):
                 success, time = runner.run_test(sample, solution)

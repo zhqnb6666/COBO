@@ -2,7 +2,6 @@
 import concurrent
 import json
 from typing import Optional, List, Tuple
-
 from models.OpenAILLM import OpenAILLM
 from models.QianFanLLM import QianFanLLM
 

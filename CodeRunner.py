@@ -27,7 +27,7 @@ class ExecutionStatus:
 
     @staticmethod
     def return_code_error(code: int) -> Tuple[bool, str]:
-        return (False, f"returncode:{code}")
+        return False, f"returncode:{code}"
 
 
 class TimeoutException(Exception):
@@ -96,22 +96,13 @@ class CodeRunner:
         """Processes input and output test cases"""
         inputs_list = []
         outputs_list = []
-
-        if len(in_outs["inputs"])<3:
-            for i, inputs in enumerate(in_outs["inputs"]):
-                outputs = in_outs["outputs"][i]
-                processed_inputs = self._process_input(inputs)
-                processed_outputs = self._process_output(outputs)
-                inputs_list.append(processed_inputs)
-                outputs_list.append(processed_outputs)
-        else:
-            for i in range(3):
-                inputs = in_outs["inputs"][i]
-                outputs = in_outs["outputs"][i]
-                processed_inputs = self._process_input(inputs)
-                processed_outputs = self._process_output(outputs)
-                inputs_list.append(processed_inputs)
-                outputs_list.append(processed_outputs)
+        for i in range(min(10, len(in_outs["inputs"]))):
+            inputs = in_outs["inputs"][i]
+            outputs = in_outs["outputs"][i]
+            processed_inputs = self._process_input(inputs)
+            processed_outputs = self._process_output(outputs)
+            inputs_list.append(processed_inputs)
+            outputs_list.append(processed_outputs)
 
         return inputs_list, outputs_list
 
@@ -129,7 +120,7 @@ class CodeRunner:
             return [{int(k): v for k, v in outputs[0].items()}]
         return outputs
 
-    def _evaluate_call_based(self, test_code: str, method_name: str,
+    def evaluate_call_based(self, test_code: str, method_name: str,
                              inputs_list: List[Any], outputs_list: List[Any]) -> Tuple[bool, float]:
         """Evaluates function-based code and returns a tuple of (is_all_passed, total_time)."""
         synthesized_code = self._prepare_call_based_code(test_code)

@@ -24,10 +24,10 @@ def test_connection():
             user=DB_USER,
             password=DB_PASSWORD
         )
-        print("Connection to the database was successful.")
+        # print("Connection to the database was successful.")
         connection.close()
     except OperationalError as e:
         print(f"Error: Unable to connect to the database\n{e}")
 
 # Run the test
-test_connection()
+# test_connection()

@@ -1,5 +1,5 @@
 # database/models.py
-from sqlalchemy import Column, Integer, String, Text, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, DOUBLE_PRECISION
 from sqlalchemy.orm import relationship
 from database.base import Base
 
@@ -24,10 +24,14 @@ class TACOProblem(Base):
     memory_limit = Column(String)
     expected_time_complexity = Column(String, nullable=True)
     fn_name = Column(String, nullable=True)
-
+    is_tested = Column(Integer, default=0)
+    is_valid = Column(Integer, default=0)
+    test_repeat_time = Column(Integer, default=1)
     # Relationships
     solutions = relationship('Solution', back_populates='problem')
+    valid_solutions = relationship('ValidSolution', back_populates='problem')
     input_outputs = relationship('InputOutput', back_populates='problem')
+
 
 class Solution(Base):
     __tablename__ = 'solutions0_2'
@@ -36,9 +40,24 @@ class Solution(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     problem_id = Column(Integer, ForeignKey('public.taco_problems0_2.id'))
     solution_text = Column(Text)
-
+    is_tested = Column(Integer, default=0)
     # Relationship
     problem = relationship('TACOProblem', back_populates='solutions')
+    valid_solution = relationship('ValidSolution', back_populates='solution')
+
+
+class ValidSolution(Base):
+    __tablename__ = 'valid_solutions0_2'
+    __table_args__ = {'schema': 'public'}
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    problem_id = Column(Integer, ForeignKey('public.taco_problems0_2.id'))
+    solution_id = Column(Integer, ForeignKey('public.solutions0_2.id'))
+    solution_text = Column(Text)
+    run_time = Column(DOUBLE_PRECISION)
+    problem = relationship('TACOProblem', back_populates='valid_solutions')
+    solution = relationship('Solution', back_populates='valid_solution')
+
 
 class InputOutput(Base):
     __tablename__ = 'input_outputs0_2'

@@ -1,6 +1,7 @@
 import json
+
 from datasets import load_dataset
-from typing import List, Dict, Any
+
 
 def save_first_solutions(start_idx=0, end_idx=10):
     """

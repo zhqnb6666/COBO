@@ -7,8 +7,8 @@ from psycopg2 import OperationalError
 DB_HOST = "localhost"
 DB_PORT = "5432"
 DB_NAME = "taco_db"
-DB_USER = "zhq"
-DB_PASSWORD = "abc@1234"
+DB_USER = "postgres"
+DB_PASSWORD = "kzq3084046930"
 
 encoded_password = urllib.parse.quote(DB_PASSWORD)
 

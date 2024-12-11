@@ -1,5 +1,9 @@
 # 测试次数
 test_times = 3
+# 进程池大小
+pool_size = 3
+# 超时时间
+timeout_seconds = 2
 def run_solution(args):
     from CodeRunner import CodeRunner
     import numpy as np
@@ -15,14 +19,12 @@ def run_solution(args):
         if successes.all():
             return {"solution_id": solution_id, "solution_text": solution, "total_time": total_times.mean()}
     except Exception as e:
-        pass
+        print(f"test solution {solution_id} failed")
     return None
 
 def execute_code(solutions, input_list, output_list, fn_name):
     import multiprocessing
-    timeout_seconds = 2
     results = []
-    pool_size = 6  # 设置进程池大小
     with multiprocessing.Pool(processes=pool_size) as pool:
         async_results = [pool.apply_async(run_solution, args=((solution_id, solution, input_list, output_list, fn_name),)) for solution_id, solution in solutions]
         for async_result in async_results:

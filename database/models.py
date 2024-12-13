@@ -55,6 +55,7 @@ class ValidSolution(Base):
     solution_id = Column(Integer, ForeignKey('public.solutions0_2.id'))
     solution_text = Column(Text)
     run_time = Column(DOUBLE_PRECISION)
+    test_iterations = Column(Integer, default=0)
     problem = relationship('TACOProblem', back_populates='valid_solutions')
     solution = relationship('Solution', back_populates='valid_solution')
 

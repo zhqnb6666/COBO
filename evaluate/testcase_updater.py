@@ -9,7 +9,7 @@ from database.base import engine
 Session = sessionmaker(bind=engine)
 session = Session()
 
-jsonl_file_path = "test_results_io.jsonl"
+jsonl_file_path = "tmp_file/test_results_io.jsonl"
 def main():
     valid_problem_ids = []
     with open(jsonl_file_path, "r") as file:

@@ -62,13 +62,13 @@ def test_problems():
                     "repeat_count": repeat_count
                 })
                 if len(data_batch) >= batch_size:
-                    with jsonlines.open("test_results_io.jsonl", mode="a") as writer:
+                    with jsonlines.open("tmp_file/test_results_io.jsonl", mode="a") as writer:
                         writer.write_all(data_batch)
                     data_batch.clear()
 
             break
     if data_batch:
-        with jsonlines.open("test_results_io.jsonl", mode="a") as writer:
+        with jsonlines.open("tmp_file/test_results_io.jsonl", mode="a") as writer:
             writer.write_all(data_batch)
 
     session.close()

@@ -30,9 +30,8 @@ for problem in problems:
     slow_solution = session.query(ValidSolution).filter(
         ValidSolution.problem_id == problem.id
     ).order_by(ValidSolution.run_time.desc()).first()
-
     # 确保两个解决方案都存在
-    if not fast_solution or not slow_solution:
+    if not fast_solution or not slow_solution or fast_solution == slow_solution:
         continue
 
     # 构建问题数据

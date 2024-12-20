@@ -3,7 +3,7 @@ import json
 
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
-from database.models import TACOProblem, Solution, InputOutput
+from database.models import TACOProblem, Solution, InputOutput, ValidSolution
 from loader import load_taco_dataset
 from database.base import Base, engine
 

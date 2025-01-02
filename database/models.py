@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from database.base import Base
 
 class TACOProblem(Base):
-    __tablename__ = 'taco_problems0_2'
+    __tablename__ = 'taco_problems3_5'
     __table_args__ = {'schema': 'public'}
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -34,11 +34,11 @@ class TACOProblem(Base):
 
 
 class Solution(Base):
-    __tablename__ = 'solutions0_2'
+    __tablename__ = 'solutions3_5'
     __table_args__ = {'schema': 'public'}
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    problem_id = Column(Integer, ForeignKey('public.taco_problems0_2.id'))
+    problem_id = Column(Integer, ForeignKey('public.taco_problems3_5.id'))
     solution_text = Column(Text)
     is_tested = Column(Integer, default=0)
     # Relationship
@@ -47,12 +47,12 @@ class Solution(Base):
 
 
 class ValidSolution(Base):
-    __tablename__ = 'valid_solutions0_2'
+    __tablename__ = 'valid_solutions3_5'
     __table_args__ = {'schema': 'public'}
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    problem_id = Column(Integer, ForeignKey('public.taco_problems0_2.id'))
-    solution_id = Column(Integer, ForeignKey('public.solutions0_2.id'))
+    problem_id = Column(Integer, ForeignKey('public.taco_problems3_5.id'))
+    solution_id = Column(Integer, ForeignKey('public.solutions3_5.id'))
     solution_text = Column(Text)
     run_time = Column(DOUBLE_PRECISION)
     test_iterations = Column(Integer, default=0)
@@ -61,11 +61,11 @@ class ValidSolution(Base):
 
 
 class InputOutput(Base):
-    __tablename__ = 'input_outputs0_2'
+    __tablename__ = 'input_outputs3_5'
     __table_args__ = {'schema': 'public'}
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    problem_id = Column(Integer, ForeignKey('public.taco_problems0_2.id'))
+    problem_id = Column(Integer, ForeignKey('public.taco_problems3_5.id'))
     input_text = Column(Text)
     output_text = Column(Text)
 

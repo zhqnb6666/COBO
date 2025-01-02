@@ -14,7 +14,6 @@ def create_db_session():
 def run_solution_tests(solution_id: int):
     session = create_db_session()
     try:
-        # 获取指定的解决方案,不要用get
         solution = session.query(Solution).filter(Solution.id == solution_id).first()
         if not solution:
             print(f"没有找到ID为 {solution_id} 的解决方案。")
@@ -54,4 +53,4 @@ def run_solution_tests(solution_id: int):
 
 
 if __name__ == "__main__":
-    run_solution_tests(68513)
+    run_solution_tests(493886)

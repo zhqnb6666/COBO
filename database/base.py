@@ -8,7 +8,7 @@ Base = declarative_base()
 # print(DATABASE_URL)
 engine = create_engine(
     DATABASE_URL,
-    # poolclass=NullPool,
+    poolclass=NullPool,
     connect_args={'options': '-csearch_path=public'})
 SessionLocal = sessionmaker(bind=engine)
 

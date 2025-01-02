@@ -41,14 +41,21 @@ def expand_time_difference(json_data):
     return expanded_json
 
 # File reading and writing
-input_file = 'tmp_file/significant_time_differences.json'
+input_file = 'significant_time_differences3_5.json'
 output_file = 'optimizable_dataset.json'
 
 #utf-8
 with open(input_file, 'r', encoding='utf-8') as f:
     json_input_list = json.load(f)
 
-expanded_json_list = [expand_time_difference(json_input) for json_input in json_input_list]
+expanded_json_list = []
+for json_data in json_input_list:
+    try:
+        expanded_json = expand_time_difference(json_data)
+    except Exception as e:
+        print(f"Error processing problem {json_data['problem_id']}: {e}")
+        continue
+    expanded_json_list.append(expanded_json)
 
 with open(output_file, 'w', encoding='utf-8') as f:
     json.dump(expanded_json_list, f, indent=2, ensure_ascii=False)

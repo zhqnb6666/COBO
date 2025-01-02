@@ -27,7 +27,7 @@ def main():
                 InputOutput.id.notin_(tested_ids)
             ).delete(synchronize_session="fetch")
     session.query(TACOProblem).filter(
-        TACOProblem.id.notin_(valid_problem_ids)
+        TACOProblem.id.in_(valid_problem_ids)
     ).update({"is_valid": 1}, synchronize_session="fetch")
     session.commit()
     session.close()

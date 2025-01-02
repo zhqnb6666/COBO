@@ -72,7 +72,7 @@ for problem in problems:
     dataset.append(problem_data)
 print(f"共找到 {len(dataset)} 个问题")
 # 保存到 JSON 文件
-output_file = "dataset.json"
+output_file = "dataset3_5.json"
 with open(output_file, "w", encoding="utf-8") as f:
     json.dump(dataset, f, ensure_ascii=False, indent=4)
 
